@@ -880,7 +880,7 @@ try {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.URL_COMICS = exports.URL_CHARACTERS = exports.API_URL = exports.API_KEY = void 0;
+exports.URL_COMICS = exports.URL_CHARACTERS = exports.IMG_STANDART_XLARGE = exports.IMG_NOT_AVAILABLE = exports.API_URL = exports.API_KEY = void 0;
 var API_KEY = "a5837db97d72016c81a7a776f4240db9";
 exports.API_KEY = API_KEY;
 var API_URL = "https://gateway.marvel.com/v1/public/";
@@ -889,6 +889,10 @@ var URL_COMICS = "comics";
 exports.URL_COMICS = URL_COMICS;
 var URL_CHARACTERS = "characters";
 exports.URL_CHARACTERS = URL_CHARACTERS;
+var IMG_STANDART_XLARGE = 'standard_xlarge';
+exports.IMG_STANDART_XLARGE = IMG_STANDART_XLARGE;
+var IMG_NOT_AVAILABLE = 'image_not_available';
+exports.IMG_NOT_AVAILABLE = IMG_NOT_AVAILABLE;
 },{}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
@@ -5393,7 +5397,18 @@ var GetDataApi = /*#__PURE__*/function () {
 
 var getDataApi = new GetDataApi();
 exports.getDataApi = getDataApi;
-},{"axios":"../node_modules/axios/index.js","../constants/api":"../src/constants/api.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","../constants/api":"../src/constants/api.js"}],"../src/constants/root.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ROOT_MODAL = exports.ROOT_INDEX = void 0;
+var ROOT_INDEX = document.getElementById('root');
+exports.ROOT_INDEX = ROOT_INDEX;
+var ROOT_MODAL = document.getElementById('modal');
+exports.ROOT_MODAL = ROOT_MODAL;
+},{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -5460,7 +5475,122 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../src/components/App/App.css":[function(require,module,exports) {
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../src/components/Comics/Comics.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/Comics/Comics.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _api = require("../../constants/api");
+
+var _getDataApi = require("../../utils/getDataApi");
+
+var _root = require("../../constants/root");
+
+require("./Comics.css");
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var Comics = /*#__PURE__*/function () {
+  function Comics() {
+    _classCallCheck(this, Comics);
+  }
+
+  _createClass(Comics, [{
+    key: "render",
+    value: function () {
+      var _render = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var data, htmlContent, htmlWrapper;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _getDataApi.getDataApi.getData(_api.API_URL + _api.URL_COMICS);
+
+              case 2:
+                data = _context.sent;
+                htmlContent = '';
+                data.forEach(function (_ref) {
+                  var id = _ref.id,
+                      title = _ref.title,
+                      _ref$thumbnail = _ref.thumbnail,
+                      path = _ref$thumbnail.path,
+                      extension = _ref$thumbnail.extension;
+
+                  if (path.lastIndexOf(_api.IMG_NOT_AVAILABLE) === -1) {
+                    var uri = _api.API_URL + _api.URL_COMICS + '/' + id + '/' + _api.URL_CHARACTERS;
+                    var imgSrc = path + '/' + _api.IMG_STANDART_XLARGE + '.' + extension;
+                    htmlContent += "\n               <li class=\"comics__item\" data-uri=\"".concat(uri, "\">\n                  <span class=\"comics__name\">").concat(title, "</span>\n                  <img class=\"comics__img\" src=\"").concat(imgSrc, "\" />\n               </li>\n            ");
+                  }
+                });
+                htmlWrapper = "\n         <ul class=\"comics__container\">\n            ".concat(htmlContent, "\n         </ul>\n      ");
+                _root.ROOT_INDEX.innerHTML = htmlWrapper;
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function render() {
+        return _render.apply(this, arguments);
+      }
+
+      return render;
+    }()
+  }, {
+    key: "eventListener",
+    value: function eventListener() {
+      document.querySelectorAll('.comics__item').forEach(function (element) {
+        var uri = element.getAttribute('data-uri');
+        element.addEventListener('click', function () {
+          console.log(uri);
+        });
+      });
+    }
+  }]);
+
+  return Comics;
+}();
+
+var _default = new Comics();
+
+exports.default = _default;
+},{"../../constants/api":"../src/constants/api.js","../../utils/getDataApi":"../src/utils/getDataApi.js","../../constants/root":"../src/constants/root.js","./Comics.css":"../src/components/Comics/Comics.css"}],"../src/components/Comics/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _Comics.default;
+  }
+});
+
+var _Comics = _interopRequireDefault(require("./Comics"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./Comics":"../src/components/Comics/Comics.js"}],"../src/components/App/App.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -5473,11 +5603,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _api = require("../../constants/api");
-
-var _getDataApi = require("../../utils/getDataApi");
+var _Comics = _interopRequireDefault(require("../Comics"));
 
 require("./App.css");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -5498,19 +5628,14 @@ var App = /*#__PURE__*/function () {
     key: "render",
     value: function () {
       var _render = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var data;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _getDataApi.getDataApi.getData(_api.API_URL + _api.URL_COMICS);
+                return _Comics.default.render();
 
               case 2:
-                data = _context.sent;
-                console.log(data);
-
-              case 4:
               case "end":
                 return _context.stop();
             }
@@ -5532,7 +5657,7 @@ var App = /*#__PURE__*/function () {
 var _default = new App();
 
 exports.default = _default;
-},{"../../constants/api":"../src/constants/api.js","../../utils/getDataApi":"../src/utils/getDataApi.js","./App.css":"../src/components/App/App.css"}],"../src/components/App/index.js":[function(require,module,exports) {
+},{"../Comics":"../src/components/Comics/index.js","./App.css":"../src/components/App/App.css"}],"../src/components/App/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5555,6 +5680,8 @@ require("regenerator-runtime/runtime");
 
 var _App = _interopRequireDefault(require("./components/App"));
 
+var _Comics = _interopRequireDefault(require("./components/Comics"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -5570,13 +5697,16 @@ _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
           return _App.default.render();
 
         case 2:
+          _Comics.default.eventListener();
+
+        case 3:
         case "end":
           return _context.stop();
       }
     }
   }, _callee);
 }))();
-},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","./components/App":"../src/components/App/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","./components/App":"../src/components/App/index.js","./components/Comics":"../src/components/Comics/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -5604,7 +5734,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58885" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56366" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
