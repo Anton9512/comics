@@ -5408,6 +5408,8 @@ var ROOT_INDEX = document.getElementById('root');
 exports.ROOT_INDEX = ROOT_INDEX;
 var ROOT_MODAL = document.getElementById('modal');
 exports.ROOT_MODAL = ROOT_MODAL;
+},{}],"../src/components/Notification/img/close-black.svg":[function(require,module,exports) {
+module.exports = "/close-black.0f0d6dc0.svg";
 },{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
@@ -5475,7 +5477,194 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../src/components/Error/Error.css":[function(require,module,exports) {
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../src/components/Notification/Notification.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+module.exports = {
+  "notification__container": "_notification__container_68008",
+  "notification__close": "_notification__close_68008"
+};
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/Notification/Notification.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _root = require("../../constants/root");
+
+var _closeBlack = _interopRequireDefault(require("./img/close-black.svg"));
+
+var _Notification = _interopRequireDefault(require("./Notification.css"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var Notification = /*#__PURE__*/function () {
+  function Notification() {
+    _classCallCheck(this, Notification);
+  }
+
+  _createClass(Notification, [{
+    key: "render",
+    value: function render() {
+      var htmlWrapper = "\n         <div class=\"".concat(_Notification.default.notification__container, "\">\n         <span>\u041D\u0435\u0442 \u043A\u043E\u043D\u0442\u0435\u043D\u0442\u0430</span>\n         <button \n               class=\"btn bg-contain ").concat(_Notification.default.notification__close, "\"\n               onclick=\"modal.innerHTML = ''\"\n               style=\"background-image: url(").concat(_closeBlack.default, ")\"\n         ></button>\n         </div>\n      ");
+      _root.ROOT_MODAL.innerHTML = htmlWrapper;
+    }
+  }]);
+
+  return Notification;
+}();
+
+var _default = new Notification();
+
+exports.default = _default;
+},{"../../constants/root":"../src/constants/root.js","./img/close-black.svg":"../src/components/Notification/img/close-black.svg","./Notification.css":"../src/components/Notification/Notification.css"}],"../src/components/Notification/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _Notification.default;
+  }
+});
+
+var _Notification = _interopRequireDefault(require("./Notification"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./Notification":"../src/components/Notification/Notification.js"}],"../src/components/Characters/img/close-white.svg":[function(require,module,exports) {
+module.exports = "/close-white.54c362ca.svg";
+},{}],"../src/components/Characters/Characters.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+module.exports = {
+  "wrapper": "_wrapper_c6e9d",
+  "characters__container": "_characters__container_c6e9d",
+  "characters__item": "_characters__item_c6e9d",
+  "characters__img": "_characters__img_c6e9d",
+  "characters__name": "_characters__name_c6e9d",
+  "characters__close": "_characters__close_c6e9d"
+};
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/Characters/Characters.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _getDataApi = require("../../utils/getDataApi");
+
+var _api = require("../../constants/api");
+
+var _root = require("../../constants/root");
+
+var _Notification = _interopRequireDefault(require("../Notification"));
+
+var _closeWhite = _interopRequireDefault(require("./img/close-white.svg"));
+
+var _Characters = _interopRequireDefault(require("./Characters.css"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var Characters = /*#__PURE__*/function () {
+  function Characters() {
+    _classCallCheck(this, Characters);
+  }
+
+  _createClass(Characters, [{
+    key: "renderContent",
+    value: function renderContent(data) {
+      var htmlContent = '';
+      data.forEach(function (_ref) {
+        var name = _ref.name,
+            _ref$thumbnail = _ref.thumbnail,
+            path = _ref$thumbnail.path,
+            extension = _ref$thumbnail.extension;
+        var imgSrc = path + '/' + _api.IMG_STANDART_XLARGE + '.' + extension;
+        htmlContent += "\n            <li class=\"".concat(_Characters.default.characters__item, "\">\n               <img class=\"img-cover ").concat(_Characters.default.characters__img, "\" src=\"").concat(imgSrc, "\"/>\n               <span class=\"").concat(_Characters.default.characters__name, "\">").concat(name, "</span>\n            </li>\n         ");
+      });
+      var htmlWrapper = "\n        <div class=\"".concat(_Characters.default.wrapper, "\">\n            <ul class=\"").concat(_Characters.default.characters__container, "\">\n               ").concat(htmlContent, "\n            </ul>\n            <button \n               class=\"btn bg-contain ").concat(_Characters.default.characters__close, "\"\n               onclick=\"modal.innerHTML = ''\"\n               style=\"background-image: url(").concat(_closeWhite.default, ")\"\n            ></button>\n        </div>\n      ");
+      _root.ROOT_MODAL.innerHTML = htmlWrapper;
+    }
+  }, {
+    key: "render",
+    value: function () {
+      var _render = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(uri) {
+        var data;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _getDataApi.getDataApi.getData(uri);
+
+              case 2:
+                data = _context.sent;
+                data.length ? this.renderContent(data) : _Notification.default.render();
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function render(_x) {
+        return _render.apply(this, arguments);
+      }
+
+      return render;
+    }()
+  }]);
+
+  return Characters;
+}();
+
+var _default = new Characters();
+
+exports.default = _default;
+},{"../../utils/getDataApi":"../src/utils/getDataApi.js","../../constants/api":"../src/constants/api.js","../../constants/root":"../src/constants/root.js","../Notification":"../src/components/Notification/index.js","./img/close-white.svg":"../src/components/Characters/img/close-white.svg","./Characters.css":"../src/components/Characters/Characters.css"}],"../src/components/Characters/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _Characters.default;
+  }
+});
+
+var _Characters = _interopRequireDefault(require("./Characters"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./Characters":"../src/components/Characters/Characters.js"}],"../src/components/Error/Error.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -5565,6 +5754,8 @@ var _getDataApi = require("../../utils/getDataApi");
 
 var _root = require("../../constants/root");
 
+var _Characters = _interopRequireDefault(require("../Characters"));
+
 var _Error = _interopRequireDefault(require("../Error"));
 
 var _Comics = _interopRequireDefault(require("./Comics.css"));
@@ -5642,7 +5833,7 @@ var Comics = /*#__PURE__*/function () {
       document.querySelectorAll('.comics__item').forEach(function (element) {
         var uri = element.getAttribute('data-uri');
         element.addEventListener('click', function () {
-          console.log(uri);
+          _Characters.default.render(uri);
         });
       });
     }
@@ -5654,7 +5845,7 @@ var Comics = /*#__PURE__*/function () {
 var _default = new Comics();
 
 exports.default = _default;
-},{"../../constants/api":"../src/constants/api.js","../../utils/getDataApi":"../src/utils/getDataApi.js","../../constants/root":"../src/constants/root.js","../Error":"../src/components/Error/index.js","./Comics.css":"../src/components/Comics/Comics.css"}],"../src/components/Comics/index.js":[function(require,module,exports) {
+},{"../../constants/api":"../src/constants/api.js","../../utils/getDataApi":"../src/utils/getDataApi.js","../../constants/root":"../src/constants/root.js","../Characters":"../src/components/Characters/index.js","../Error":"../src/components/Error/index.js","./Comics.css":"../src/components/Comics/Comics.css"}],"../src/components/Comics/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5675,11 +5866,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-module.exports = {
-  "btn": "_btn_1d6f5",
-  "img-contain": "_img-contain_1d6f5",
-  "img-cover": "_img-cover_1d6f5"
-};
+module.exports = {};
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/App/App.js":[function(require,module,exports) {
 "use strict";
 
@@ -5819,7 +6006,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61856" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50499" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

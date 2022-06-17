@@ -31,21 +31,27 @@ body {
   background-color: #222222;
 }
 
-.btn {
+:global(.btn) {
   border: none;
   outline: none;
   background: none;
   cursor: pointer;
 }
 
-.img-contain {
+:global(.img-contain) {
   display: block;
   object-fit: contain;
   object-position: center;
 }
 
-.img-cover {
+:global(.img-cover) {
   display: block;
   object-fit: cover;
   object-position: center;
+}
+
+:global(.bg-contain) {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
