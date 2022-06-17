@@ -5480,6 +5480,13 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+module.exports = {
+  "comics__container": "_comics__container_9f7a5",
+  "comics__item": "_comics__item_9f7a5",
+  "comics__name": "_comics__name_9f7a5",
+  "comics__img": "_comics__img_9f7a5",
+  "border": "_border_9f7a5"
+};
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/Comics/Comics.js":[function(require,module,exports) {
 "use strict";
 
@@ -5494,7 +5501,9 @@ var _getDataApi = require("../../utils/getDataApi");
 
 var _root = require("../../constants/root");
 
-require("./Comics.css");
+var _Comics = _interopRequireDefault(require("./Comics.css"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -5536,10 +5545,10 @@ var Comics = /*#__PURE__*/function () {
                   if (path.lastIndexOf(_api.IMG_NOT_AVAILABLE) === -1) {
                     var uri = _api.API_URL + _api.URL_COMICS + '/' + id + '/' + _api.URL_CHARACTERS;
                     var imgSrc = path + '/' + _api.IMG_STANDART_XLARGE + '.' + extension;
-                    htmlContent += "\n               <li class=\"comics__item\" data-uri=\"".concat(uri, "\">\n                  <span class=\"comics__name\">").concat(title, "</span>\n                  <img class=\"comics__img\" src=\"").concat(imgSrc, "\" />\n               </li>\n            ");
+                    htmlContent += "\n               <li class=\"comics__item ".concat(_Comics.default.comics__item, " ").concat(_Comics.default.border, "\" data-uri=\"").concat(uri, "\">\n                  <span class=\"").concat(_Comics.default.comics__name, "\">").concat(title, "</span>\n                  <img class=\"img-contain ").concat(_Comics.default.comics__img, "\" src=\"").concat(imgSrc, "\" />\n               </li>\n            ");
                   }
                 });
-                htmlWrapper = "\n         <ul class=\"comics__container\">\n            ".concat(htmlContent, "\n         </ul>\n      ");
+                htmlWrapper = "\n         <ul class=\"".concat(_Comics.default.comics__container, "\">\n            ").concat(htmlContent, "\n         </ul>\n      ");
                 _root.ROOT_INDEX.innerHTML = htmlWrapper;
 
               case 7:
@@ -5595,6 +5604,10 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+module.exports = {
+  "img-contain": "_img-contain_1d6f5",
+  "img-cover": "_img-cover_1d6f5"
+};
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/App/App.js":[function(require,module,exports) {
 "use strict";
 
@@ -5734,7 +5747,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56366" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50139" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

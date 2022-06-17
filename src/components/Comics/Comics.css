@@ -27,4 +27,22 @@
 
 .comics__img {
    width: 100%;
+
 }
+
+.border {
+   border: 5px solid orange;
+}
+
+:global(.img-contain) {
+   display: block;
+   object-fit: contain;
+   object-position: center;
+}
+
+:global(.img-cover) {
+   display: block;
+   object-fit: cover;
+   object-position: center;
+}
+
