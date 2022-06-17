@@ -5475,7 +5475,71 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../src/components/Comics/Comics.css":[function(require,module,exports) {
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../src/components/Error/Error.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+module.exports = {
+  "error__container": "_error__container_9033a",
+  "error__alert": "_error__alert_9033a"
+};
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/Error/Error.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _root = require("../../constants/root");
+
+var _Error = _interopRequireDefault(require("./Error.css"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var Error = /*#__PURE__*/function () {
+  function Error() {
+    _classCallCheck(this, Error);
+  }
+
+  _createClass(Error, [{
+    key: "render",
+    value: function render() {
+      var htmlWrapper = "\n         <div class=\"".concat(_Error.default.error__container, "\">\n            <span>\n               <p class=\"").concat(_Error.default.error__alert, "\">\u041F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430</p>\n               <p class=\"").concat(_Error.default.error__alert, "\">\u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u0437\u0430\u0439\u0442\u0438 \u043F\u043E\u0437\u0436\u0435</p>\n            </span>\n         </div>\n      ");
+      _root.ROOT_INDEX.innerHTML = htmlWrapper;
+    }
+  }]);
+
+  return Error;
+}();
+
+var _default = new Error();
+
+exports.default = _default;
+},{"../../constants/root":"../src/constants/root.js","./Error.css":"../src/components/Error/Error.css"}],"../src/components/Error/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function () {
+    return _Error.default;
+  }
+});
+
+var _Error = _interopRequireDefault(require("./Error"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./Error":"../src/components/Error/Error.js"}],"../src/components/Comics/Comics.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -5501,6 +5565,8 @@ var _getDataApi = require("../../utils/getDataApi");
 
 var _root = require("../../constants/root");
 
+var _Error = _interopRequireDefault(require("../Error"));
+
 var _Comics = _interopRequireDefault(require("./Comics.css"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -5521,10 +5587,30 @@ var Comics = /*#__PURE__*/function () {
   }
 
   _createClass(Comics, [{
+    key: "renderComics",
+    value: function renderComics(data) {
+      var htmlContent = '';
+      data.forEach(function (_ref) {
+        var id = _ref.id,
+            title = _ref.title,
+            _ref$thumbnail = _ref.thumbnail,
+            path = _ref$thumbnail.path,
+            extension = _ref$thumbnail.extension;
+
+        if (path.lastIndexOf(_api.IMG_NOT_AVAILABLE) === -1) {
+          var uri = _api.API_URL + _api.URL_COMICS + '/' + id + '/' + _api.URL_CHARACTERS;
+          var imgSrc = path + '/' + _api.IMG_STANDART_XLARGE + '.' + extension;
+          htmlContent += "\n               <li class=\"comics__item ".concat(_Comics.default.comics__item, " ").concat(_Comics.default.border, "\" data-uri=\"").concat(uri, "\">\n                  <span class=\"").concat(_Comics.default.comics__name, "\">").concat(title, "</span>\n                  <img class=\"img-contain ").concat(_Comics.default.comics__img, "\" src=\"").concat(imgSrc, "\" />\n               </li>\n            ");
+        }
+      });
+      var htmlWrapper = "\n         <ul class=\"".concat(_Comics.default.comics__container, "\">\n            ").concat(htmlContent, "\n         </ul>\n      ");
+      _root.ROOT_INDEX.innerHTML = htmlWrapper;
+    }
+  }, {
     key: "render",
     value: function () {
       var _render = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var data, htmlContent, htmlWrapper;
+        var data;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -5534,29 +5620,14 @@ var Comics = /*#__PURE__*/function () {
 
               case 2:
                 data = _context.sent;
-                htmlContent = '';
-                data.forEach(function (_ref) {
-                  var id = _ref.id,
-                      title = _ref.title,
-                      _ref$thumbnail = _ref.thumbnail,
-                      path = _ref$thumbnail.path,
-                      extension = _ref$thumbnail.extension;
+                data ? this.renderComics(data) : _Error.default.render();
 
-                  if (path.lastIndexOf(_api.IMG_NOT_AVAILABLE) === -1) {
-                    var uri = _api.API_URL + _api.URL_COMICS + '/' + id + '/' + _api.URL_CHARACTERS;
-                    var imgSrc = path + '/' + _api.IMG_STANDART_XLARGE + '.' + extension;
-                    htmlContent += "\n               <li class=\"comics__item ".concat(_Comics.default.comics__item, " ").concat(_Comics.default.border, "\" data-uri=\"").concat(uri, "\">\n                  <span class=\"").concat(_Comics.default.comics__name, "\">").concat(title, "</span>\n                  <img class=\"img-contain ").concat(_Comics.default.comics__img, "\" src=\"").concat(imgSrc, "\" />\n               </li>\n            ");
-                  }
-                });
-                htmlWrapper = "\n         <ul class=\"".concat(_Comics.default.comics__container, "\">\n            ").concat(htmlContent, "\n         </ul>\n      ");
-                _root.ROOT_INDEX.innerHTML = htmlWrapper;
-
-              case 7:
+              case 4:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, this);
       }));
 
       function render() {
@@ -5583,7 +5654,7 @@ var Comics = /*#__PURE__*/function () {
 var _default = new Comics();
 
 exports.default = _default;
-},{"../../constants/api":"../src/constants/api.js","../../utils/getDataApi":"../src/utils/getDataApi.js","../../constants/root":"../src/constants/root.js","./Comics.css":"../src/components/Comics/Comics.css"}],"../src/components/Comics/index.js":[function(require,module,exports) {
+},{"../../constants/api":"../src/constants/api.js","../../utils/getDataApi":"../src/utils/getDataApi.js","../../constants/root":"../src/constants/root.js","../Error":"../src/components/Error/index.js","./Comics.css":"../src/components/Comics/Comics.css"}],"../src/components/Comics/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5605,6 +5676,7 @@ var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
 module.exports = {
+  "btn": "_btn_1d6f5",
   "img-contain": "_img-contain_1d6f5",
   "img-cover": "_img-cover_1d6f5"
 };
@@ -5747,7 +5819,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50139" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61856" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

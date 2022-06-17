@@ -31,7 +31,7 @@ body {
   background-color: #222222;
 }
 
-:global(.btn) {
+.btn {
   border: none;
   outline: none;
   background: none;
